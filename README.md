@@ -7,7 +7,7 @@ Live example: https://michau132.github.io/gitFinder/#/
 
 ## Installation
 
-1. [`clone`](https://github.com/michau132/gitFinder.git) this repository and go into the project root
+1. [`clone`](https://github.com/michau132/DragNDrop.git) this repository and go into the project root
 1. `yarn install` | `npm install` to install the website's npm dependencies
 
 ### Running locally
@@ -17,7 +17,7 @@ Live example: https://michau132.github.io/gitFinder/#/
 
 
 ## Description
-Simple app where you can easily add new image and it shows details about pushed image.
+App which show name, type, size, geolocation of picture. It accepcts only images, on other files it would be an error. Files without geolocation also throws error. When image is loaded it shows on map position where picture was taken. It throws an error even if the size is bigger than 1MB.
 
 
 ## Tech stack
@@ -25,4 +25,5 @@ Simple app where you can easily add new image and it shows details about pushed 
 + react-router
 + material-ui
 + styled components
++ [exif-js](https://github.com/exif-js/exif-js)
 
