@@ -1,18 +1,13 @@
-/* eslint-disable func-names */
-/* eslint-disable no-unused-vars */
-/* eslint-disable operator-linebreak */
-/* eslint-disable arrow-body-style */
-/* eslint-disable react/prop-types */
 /* eslint-disable react/destructuring-assignment */
+/* eslint-disable func-names */
 import React, { Component, Fragment } from 'react';
 import { SnackbarProvider, withSnackbar } from 'notistack';
 import { Button } from '@material-ui/core';
+import PropTypes from 'prop-types';
 import EXIF from 'exif-js';
 
-const toDecimal = (number) => {
-  return number[0].numerator + number[1].numerator /
-       (60 * number[1].denominator) + number[2].numerator / (3600 * number[2].denominator);
-};
+export const toDecimal = number => number[0].numerator + number[1].numerator
+       / (60 * number[1].denominator) + number[2].numerator / (3600 * number[2].denominator);
 
 function generateThumbnail(file) {
   const reader = new FileReader();
@@ -36,13 +31,20 @@ function generateThumbnail(file) {
   });
 }
 
-class SubmitFile extends Component {
+export class SubmitFile extends Component {
+  static propTypes = {
+    images: PropTypes.arrayOf(PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+    }).isRequired).isRequired,
+    updateImages: PropTypes.func.isRequired,
+    enqueueSnackbar: PropTypes.func.isRequired,
+  }
+
   submitFile = (files) => {
     const correctType = (file) => {
       generateThumbnail(file)
         .then(({ url, position }) => {
           const isFileInArray = this.props.images.some(el => el.avatar === url);
-          console.log(isFileInArray);
           if (!isFileInArray) {
             return this.props.updateImages({
               avatar: url,
@@ -65,8 +67,13 @@ class SubmitFile extends Component {
     };
 
 
+    // eslint-disable-next-line consistent-return
     [].forEach.call(files, (file) => {
       if (file.type.match('image.*')) {
+        if (file.size > 1000000) {
+          const sizeError = `${file.name} exceeds allowed size of 1mb`;
+          return this.showErrorSnackbar(sizeError);
+        }
         correctType(file);
       } else {
         anotherType(file);
@@ -86,6 +93,7 @@ class SubmitFile extends Component {
     );
   }
 }
+
 
 const SubmitFileWithSnackbar = withSnackbar(SubmitFile);
 

@@ -1,14 +1,6 @@
-/* eslint-disable jsx-a11y/label-has-for */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable max-len */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/destructuring-assignment */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-return-assign */
-/* eslint-disable func-names */
-/* eslint-disable react/no-unused-state */
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import { Paper, Typography } from '@material-ui/core';
 
 const HeightPaper = styled(Paper)`
@@ -16,15 +8,32 @@ const HeightPaper = styled(Paper)`
     margin-top: 20px;
     height: 250px;
     width: 90%;
-    border: 2px solid ${({ dragging }) => (dragging ? 'green' : '#000')};
+    border: 2px dashed ${({ dragging }) => (dragging ? 'green' : '#000')};
     display: flex;
     justify-content: center;
     align-items: center;
+    position: relative;
+    z-index: 2;
   }
 `;
 
+const StyledTypo = styled(Typography)`
+  transition: 0.5s all;
+  position: relative;
+  z-index: 1;
+  opacity: ${({ dragging }) => (dragging ? '0.5' : '1')};
+`;
+
+function preventDefaultAction(e) {
+  e.preventDefault();
+  e.stopPropagation();
+}
 
 class DropZone extends React.Component {
+  static propTypes = {
+    submitFile: PropTypes.func.isRequired,
+  }
+
   constructor(props, context) {
     super(props, context);
     this.state = {
@@ -32,23 +41,32 @@ class DropZone extends React.Component {
     };
   }
 
-  addHover = () => {
+
+  handleOnDragEnter = (e) => {
+    preventDefaultAction(e);
     this.setState({ isDragging: true });
   }
 
-  onDrop = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
+  handleOnDrop = (e) => {
+    preventDefaultAction(e);
+    const { submitFile } = this.props;
+    this.setState({
+      isDragging: false,
+    });
     const { files } = e.dataTransfer;
-    this.props.submitFile(files);
+    submitFile(files);
   }
 
   handleOnDragOver = (e) => {
-    e.preventDefault();
+    preventDefaultAction(e);
+    this.setState({
+      isDragging: true,
+    });
     return false;
   }
 
-  handleOnDragLeave = () => {
+  handleOnDragLeave = (e) => {
+    preventDefaultAction(e);
     this.setState({
       isDragging: false,
     });
@@ -60,12 +78,14 @@ class DropZone extends React.Component {
     return (
       <HeightPaper
         dragging={isDragging ? 1 : 0}
-        onDragEnter={this.addHover}
+        onDragEnter={this.handleOnDragEnter}
         onDragOver={this.handleOnDragOver}
-        onDrop={this.onDrop}
+        onDrop={this.handleOnDrop}
         onDragLeave={this.handleOnDragLeave}
       >
-        <Typography variant="h3">{`${text} files here`}</Typography>
+        <StyledTypo variant="h5" dragging={isDragging ? 1 : 0}>
+          {`${text} files here`}
+        </StyledTypo>
       </HeightPaper>
     );
   }

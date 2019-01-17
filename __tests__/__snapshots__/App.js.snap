@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App/> should match snapshot 1`] = `
+<styled.main>
+  <GlobalStyleComponent />
+  <Styled(WithStyles(Paper))>
+    <Map
+      images={Array []}
+    />
+    <WithStyles(Paper)>
+      <Styled(WithStyles(Grid))
+        container={true}
+        justify="space-around"
+        spacing={40}
+      >
+        <MySnackProvider
+          images={Array []}
+          render={[Function]}
+          updateImages={[Function]}
+        />
+        <WithStyles(Grid)
+          item={true}
+          md={8}
+        >
+          <FileList
+            list={Array []}
+            removeImage={[Function]}
+          />
+        </WithStyles(Grid)>
+      </Styled(WithStyles(Grid))>
+    </WithStyles(Paper)>
+  </Styled(WithStyles(Paper))>
+</styled.main>
+`;

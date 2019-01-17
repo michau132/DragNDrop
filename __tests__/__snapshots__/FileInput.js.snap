@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FileInput/> component should match snapshot 1`] = `
+<div>
+  <Styled(WithStyles(Typography))
+    variant="subtitle1"
+  >
+    Upload your files
+  </Styled(WithStyles(Typography))>
+  <input
+    accept="image/*"
+    hidden={true}
+    id="file"
+    multiple={true}
+    name="files[]"
+    onChange={[Function]}
+    type="file"
+  />
+  <label
+    htmlFor="file"
+  >
+    <WithStyles(Button)
+      color="primary"
+      component="span"
+      variant="contained"
+    >
+      Upload
+    </WithStyles(Button)>
+  </label>
+</div>
+`;

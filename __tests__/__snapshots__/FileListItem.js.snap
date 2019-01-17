@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FileListItem/> component should match snapshot 1`] = `
+<WithTheme(Fade)
+  in={true}
+>
+  <WithStyles(TableRow)>
+    <Styled(WithStyles(TableCell))
+      align="center"
+    >
+      <WithStyles(Avatar)
+        src="someUrl"
+      />
+    </Styled(WithStyles(TableCell))>
+    <Styled(WithStyles(TableCell))
+      align="center"
+    >
+      fileName.jpg
+    </Styled(WithStyles(TableCell))>
+    <Styled(WithStyles(TableCell))
+      align="center"
+    >
+      .jpg
+    </Styled(WithStyles(TableCell))>
+    <Styled(WithStyles(TableCell))
+      align="center"
+    >
+      12353
+    </Styled(WithStyles(TableCell))>
+    <Styled(WithStyles(TableCell))>
+      lat:
+       
+      12.13
+      <br />
+      lng:
+       
+      12.12
+    </Styled(WithStyles(TableCell))>
+    <Styled(WithStyles(TableCell))>
+      <WithStyles(IconButton)
+        onClick={[Function]}
+      >
+        <pure(DeleteIcon) />
+      </WithStyles(IconButton)>
+    </Styled(WithStyles(TableCell))>
+  </WithStyles(TableRow)>
+</WithTheme(Fade)>
+`;

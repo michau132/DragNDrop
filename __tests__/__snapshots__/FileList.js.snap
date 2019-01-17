@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FileList/> component should match snapshot 1`] = `
+<div>
+  <WithStyles(Table)>
+    <WithStyles(TableHead)>
+      <WithStyles(TableRow)>
+        <Styled(WithStyles(TableCell))>
+          Avatar
+        </Styled(WithStyles(TableCell))>
+        <Styled(WithStyles(TableCell))>
+          File name
+        </Styled(WithStyles(TableCell))>
+        <Styled(WithStyles(TableCell))>
+          File type
+        </Styled(WithStyles(TableCell))>
+        <Styled(WithStyles(TableCell))>
+          Size
+        </Styled(WithStyles(TableCell))>
+        <Styled(WithStyles(TableCell))>
+          Geo position
+        </Styled(WithStyles(TableCell))>
+        <Styled(WithStyles(TableCell))
+          align="center"
+        >
+          Delete
+        </Styled(WithStyles(TableCell))>
+      </WithStyles(TableRow)>
+    </WithStyles(TableHead)>
+  </WithStyles(Table)>
+  <styled.div>
+    <WithStyles(Table)>
+      <WithStyles(TableBody)>
+        <FileListItem
+          avatar="someUrl"
+          index={0}
+          key="someUrl"
+          name="fileName.jpg"
+          position={
+            Object {
+              "lat": 12.13,
+              "lng": 12.12,
+            }
+          }
+          removeImage={[MockFunction]}
+          size={12353}
+          type=".jpg"
+        />
+        <FileListItem
+          avatar="secondUrl"
+          index={1}
+          key="secondUrl"
+          name="DESC414.jpg"
+          position={
+            Object {
+              "lat": 50,
+              "lng": 13,
+            }
+          }
+          removeImage={[MockFunction]}
+          size={8346}
+          type=".jpg"
+        />
+      </WithStyles(TableBody)>
+    </WithStyles(Table)>
+  </styled.div>
+</div>
+`;

@@ -1,20 +1,10 @@
-/* eslint-disable react/no-access-state-in-setstate */
-/* eslint-disable react/no-unused-state */
-/* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/no-multi-comp */
-/* eslint-disable react/prefer-stateless-function */
-/* eslint-disable jsx-a11y/label-has-for */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/destructuring-assignment */
 import React from 'react';
 import styled from 'styled-components';
 import {
   Paper, Grid,
 } from '@material-ui/core';
 import Map from './Map';
-import Input from './Input';
+import Input from './FileInput';
 import FileList from './FileList';
 import Dropzone from './DropZone';
 import GlobalStyle from './GlobalStyle';
@@ -29,7 +19,7 @@ const Main = styled.main`
 const PaperWithPadding = styled(Paper)`
   && {
   padding: 10px;
-  background-color: #8FB299;
+  background-color: rgba(178,161,161, 0.6);
   width: 100%;
   }
 `;
@@ -49,6 +39,14 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    if (!('draggable' in document.createElement('span')) || !window.FileReader) {
+      // eslint-disable-next-line no-alert
+      return alert('Your browser does not support dragging');
+    }
+    return null;
+  }
+
   updateImages = (item) => {
     this.setState(prevState => ({
       images: [...prevState.images, item],
@@ -56,27 +54,25 @@ class App extends React.Component {
   }
 
   removeImage = (index) => {
-    const images = this.state.images.filter((_, i) => index !== i);
-    this.setState({
-      images,
+    this.setState((prevState) => {
+      const images = prevState.images.filter((_, i) => index !== i);
+      return {
+        images,
+      };
     });
   }
 
   render() {
+    const { images } = this.state;
     return (
-      <Main
-        onDrop={this.handleDrop}
-        onDragOver={this.handleOnDragOver}
-        onDragEnter={this.handleOnDragEnter}
-        onDragEnd={this.handleOnDragLeave}
-      >
+      <Main>
         <GlobalStyle />
         <PaperWithPadding>
-          <Map images={this.state.images} />
+          <Map images={images} />
           <Paper>
             <GridWithNoMargin container justify="space-around" spacing={40}>
               <SubmitFile
-                images={this.state.images}
+                images={images}
                 updateImages={this.updateImages}
                 render={props => (
                   <Grid item md={4} container justify="center">
@@ -85,10 +81,9 @@ class App extends React.Component {
                   </Grid>
                 )}
               />
-
               <Grid item md={8}>
                 <FileList
-                  list={this.state.images}
+                  list={images}
                   removeImage={this.removeImage}
                 />
               </Grid>

@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DropZone /> component should match snapshot 1`] = `
+<Styled(WithStyles(Paper))
+  dragging={0}
+  onDragEnter={[Function]}
+  onDragLeave={[Function]}
+  onDragOver={[Function]}
+  onDrop={[Function]}
+>
+  <Styled(WithStyles(Typography))
+    dragging={0}
+    variant="h5"
+  >
+    Drag files here
+  </Styled(WithStyles(Typography))>
+</Styled(WithStyles(Paper))>
+`;

@@ -1,19 +1,26 @@
-/* eslint-disable max-len */
-/* eslint-disable no-unused-vars */
-/* eslint-disable new-cap */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import styled from 'styled-components';
 import {
   Map as LeafletMap, TileLayer, Marker, Popup,
 } from 'react-leaflet';
+import PropTypes from 'prop-types';
 
 const StyledLeafletMap = styled(LeafletMap)`
   height: 300px;
 `;
 
 class Map extends React.Component {
+  static propTypes = {
+    images: PropTypes.arrayOf(
+      PropTypes.shape({
+        position: PropTypes.shape({
+          lat: PropTypes.number.isRequired,
+          lng: PropTypes.number.isRequired,
+        }).isRequired,
+      }).isRequired,
+    ).isRequired,
+  }
+
   constructor(props, context) {
     super(props, context);
     this.mapApi = React.createRef();

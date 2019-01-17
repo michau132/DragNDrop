@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
 import React from 'react';
 import {
   Table, TableCell, TableRow, TableHead, TableBody,
 } from '@material-ui/core';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import FileListItem from './FileListItem';
 
 const StyledWrapper = styled.div`
@@ -50,5 +50,21 @@ const FileList = ({ list, removeImage }) => (
     </StyledWrapper>
   </div>
 );
+
+FileList.propTypes = {
+  list: PropTypes.arrayOf(
+    PropTypes.shape({
+      avatar: PropTypes.string.isRequired,
+      position: PropTypes.shape({
+        lng: PropTypes.number.isRequired,
+        lat: PropTypes.number.isRequired,
+      }).isRequired,
+      name: PropTypes.string.isRequired,
+      size: PropTypes.number.isRequired,
+      type: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
+  removeImage: PropTypes.func.isRequired,
+};
 
 export default FileList;
