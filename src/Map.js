@@ -24,12 +24,39 @@ class Map extends React.Component {
   constructor(props, context) {
     super(props, context);
     this.mapApi = React.createRef();
+    this.state = {
+      bounds: [[45, -60], [45, 63]],
+    };
   }
+
+
+  static getDerivedStateFromProps(nextProps) {
+    if (nextProps.images.length === 1) {
+      const { position } = nextProps.images[0];
+      return {
+        bounds: [[position.lat + 0.01, position.lng + 0.01], [position.lat, position.lng]],
+      };
+    }
+
+    if (nextProps.images.length > 1) {
+      const positions = nextProps.images
+        .map(pos => pos.position)
+        .map(item => ([item.lat, item.lng]));
+
+      return {
+        bounds: positions,
+      };
+    }
+
+    return null;
+  }
+
 
   render() {
     const { images } = this.props;
+    const { bounds } = this.state;
     return (
-      <StyledLeafletMap center={[45, 25]} zoom={4} ref={this.mapApi}>
+      <StyledLeafletMap center={[45, 25]} zoom={4} bounds={bounds} ref={this.mapApi}>
         <TileLayer
           attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
           url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
