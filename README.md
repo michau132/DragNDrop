@@ -1,10 +1,6 @@
 # DragNDrop
 
 
-## Live demo
-Live example: https://michau132.github.io/gitFinder/#/
-
-
 ## Installation
 
 1. [`clone`](https://github.com/michau132/DragNDrop.git) this repository and go into the project root
