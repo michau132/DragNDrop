@@ -13,7 +13,12 @@
 
 
 ## Description
-App which show name, type, size, geolocation of picture. It accepcts only images, on other files it would be an error. Files without geolocation also throws error. When image is loaded it shows on map position where picture was taken. It throws an error even if the size is bigger than 1MB.
+App which show name, type, size, geolocation of picture. It accepcts only images. Also map is bounding whenever GPS coordinates are changing.
+There would be an error if: 
+ + file is not image
+ + file is an image but it hasn't geolocation
+ + file size is bigger than 1MB
+
 
 
 ## Tech stack
